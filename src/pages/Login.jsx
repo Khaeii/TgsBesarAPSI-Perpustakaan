@@ -3,98 +3,101 @@ import DecorBlob from "../components/DecorBlob";
 
 export default function Login() {
   return (
-    <div className="figma-canvas-wrapper">
-      <div className="w-[1440px] h-[746px] relative bg-Grape-Violet overflow-hidden mx-auto">
-        <DecorBlob
-          name="ungu1"
-          className="w-[601px] h-[613px] left-[881px] top-[133px] absolute"
-        />
-        <DecorBlob
-          name="ungu2"
-          className="w-[601px] h-[613px] left-[601px] top-[613px] absolute origin-top-left rotate-180"
-        />
+    <div className="w-full min-h-screen bg-Grape-Violet flex justify-center items-center overflow-x-hidden relative px-4 py-8 font-['Poppins']">
+      
+      {/* ================= BACKGROUND BLOBS (Responsif & Mengalir) ================= */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+        <DecorBlob name="ungu1" className="w-[40vw] h-[40vw] max-w-[601px] max-h-[613px] -right-20 top-10 absolute opacity-70" />
+        <DecorBlob name="ungu2" className="w-[40vw] h-[40vw] max-w-[601px] max-h-[613px] -left-20 -bottom-20 absolute rotate-180 opacity-70" />
+        <DecorBlob name="kuning1" className="w-[30vw] h-[25vw] max-w-[474px] max-h-[380px] left-10 top-[40%] absolute opacity-40" />
+        <DecorBlob name="kuning2" className="w-[30vw] h-[25vw] max-w-[474px] max-h-[380px] right-10 bottom-10 absolute rotate-180 opacity-40" />
+      </div>
 
-        <div className="left-[31px] top-[613.20px] absolute origin-top-left rotate-[-28.27deg] justify-start text-purple-300/30 text-4xl font-bold font-['Josefin_Sans']">
-          Perpustakan Kita
-        </div>
-        <div className="left-[912px] top-[405.20px] absolute origin-top-left rotate-[-28.27deg] justify-start text-amber-200/30 text-4xl font-bold font-['Josefin_Sans']">
-          Perpustakan Kita
-        </div>
-        <div className="left-[549px] top-[836.20px] absolute origin-top-left rotate-[-28.27deg] justify-start text-amber-200/30 text-4xl font-bold font-['Josefin_Sans']">
-          Perpustakan Kita
-        </div>
-        <div className="left-[-97px] top-[133.20px] absolute origin-top-left rotate-[-28.27deg] justify-start text-purple-300/30 text-4xl font-bold font-['Josefin_Sans']">
-          Perpustakan Kita
-        </div>
-        <div className="left-[1006px] top-[824.20px] absolute origin-top-left rotate-[-28.27deg] justify-start text-purple-300/30 text-4xl font-bold font-['Josefin_Sans']">
-          Perpustakan Kita
-        </div>
-        <div className="left-[1179px] top-[79.20px] absolute origin-top-left rotate-[-28.27deg] justify-start text-purple-300/30 text-4xl font-bold font-['Josefin_Sans']">
-          Perpustakan Kita
-        </div>
+      {/* ================= WATERMARKS BACKDROP ================= */}
+      <div className="absolute inset-0 pointer-events-none hidden lg:block z-10 select-none">
+        <div className="left-[5%] top-[70%] absolute rotate-[-28.27deg] text-purple-300/20 text-4xl font-bold font-['Josefin_Sans']">Perpustakan Kita</div>
+        <div className="right-[10%] top-[40%] absolute rotate-[-28.27deg] text-amber-200/15 text-4xl font-bold font-['Josefin_Sans']">Perpustakan Kita</div>
+        <div className="left-[5%] top-[15%] absolute rotate-[-28.27deg] text-purple-300/20 text-4xl font-bold font-['Josefin_Sans']">Perpustakan Kita</div>
+        <div className="right-[5%] top-[10%] absolute rotate-[-28.27deg] text-purple-300/20 text-4xl font-bold font-['Josefin_Sans']">Perpustakan Kita</div>
+      </div>
 
-        <form className="w-[485px] h-[544px] left-[478px] top-[101px] absolute bg-purple-50/90 rounded-[20px]">
-          <Link
-            to="/"
-            aria-label="Tutup"
-            className="left-[448px] top-[13px] absolute text-center justify-start text-purple-950 text-xl font-bold font-['Poppins']"
-          >
-            X
-          </Link>
+      {/* ================= FORM CARD CONTAINER ================= */}
+      <div className="w-full max-w-[485px] bg-purple-50/90 rounded-[20px] shadow-2xl p-8 md:p-10 relative z-20 transition-all backdrop-blur-sm">
+        
+        {/* Tombol Tutup X */}
+        <Link
+          to="/register"
+          aria-label="Tutup"
+          className="absolute right-6 top-6 text-purple-950 text-xl font-bold hover:text-red-500 transition-colors"
+        >
+          X
+        </Link>
 
-          <div className="w-80 left-[85px] top-[32px] absolute text-center justify-start text-Grape-Violet text-3xl font-bold font-['Poppins']">
+        {/* Header Form */}
+        <div className="text-center mb-8">
+          <h1 className="text-Grape-Violet text-3xl font-bold mb-2">
             Selamat datang
-          </div>
-          <div className="w-96 left-[47px] top-[75px] absolute text-center justify-start text-purple-950 text-base font-normal font-['Poppins']">
+          </h1>
+          <p className="text-purple-950 text-sm md:text-base font-normal max-w-[320px] mx-auto leading-relaxed">
             Masuk untuk mengakses akun perpustakaanmu!!
+          </p>
+        </div>
+
+        {/* Form Inputs */}
+        <form className="space-y-5">
+          
+          {/* Input Nama */}
+          <div className="flex flex-col gap-1.5">
+            <label className="text-Grape-Violet text-lg md:text-xl font-normal">
+              Nama
+            </label>
+            <input
+              type="text"
+              placeholder="Tulis Namamu..."
+              className="w-full h-12 rounded-[20px] border-2 border-Grape-Violet bg-transparent px-4 text-base text-purple-950 placeholder:text-purple-950/50 outline-none focus:bg-white/50 transition-all"
+            />
           </div>
 
-          {/* Nama */}
-          <label className="w-96 left-[38px] top-[119px] absolute justify-start text-Grape-Violet text-xl font-normal font-['Poppins']">
-            Nama
-          </label>
-          <input
-            type="text"
-            placeholder="Tulis Namamu..."
-            className="w-96 h-12 left-[38px] top-[149px] absolute rounded-[20px] border-2 border-Grape-Violet bg-transparent px-4 text-base font-['Poppins'] text-purple-950 placeholder:text-purple-950/50 outline-none"
-          />
+          {/* Input Email */}
+          <div className="flex flex-col gap-1.5">
+            <label className="text-Grape-Violet text-lg md:text-xl font-normal">
+              Email
+            </label>
+            <input
+              type="email"
+              placeholder="Tulis Emailmu..."
+              className="w-full h-12 rounded-[20px] border-2 border-Grape-Violet bg-transparent px-4 text-base text-purple-950 placeholder:text-purple-950/50 outline-none focus:bg-white/50 transition-all"
+            />
+          </div>
 
-          {/* Email */}
-          <label className="w-96 left-[38px] top-[212px] absolute justify-start text-Grape-Violet text-xl font-normal font-['Poppins']">
-            Email
-          </label>
-          <input
-            type="email"
-            placeholder="Tulis Emailmu..."
-            className="w-96 h-12 left-[38px] top-[242px] absolute rounded-[20px] border-2 border-Grape-Violet bg-transparent px-4 text-base font-['Poppins'] text-purple-950 placeholder:text-purple-950/50 outline-none"
-          />
+          {/* Input Password */}
+          <div className="flex flex-col gap-1.5">
+            <label className="text-Grape-Violet text-lg md:text-xl font-normal">
+              Password
+            </label>
+            <input
+              type="password"
+              placeholder="Tulis Passwordmu..."
+              className="w-full h-12 rounded-[20px] border-2 border-Grape-Violet bg-transparent px-4 text-base text-purple-950 placeholder:text-purple-950/50 outline-none focus:bg-white/50 transition-all"
+            />
+          </div>
 
-          {/* Password */}
-          <label className="w-96 left-[38px] top-[289px] absolute justify-start text-Grape-Violet text-xl font-normal font-['Poppins']">
-            Password
-          </label>
-          <input
-            type="password"
-            placeholder="Tulis Passwordmu..."
-            className="w-96 h-12 left-[38px] top-[338px] absolute rounded-[20px] border-2 border-Grape-Violet bg-transparent px-4 text-base font-['Poppins'] text-purple-950 placeholder:text-purple-950/50 outline-none"
-          />
-
+          {/* Tombol Log In */}
           <button
             type="submit"
-            className="w-96 h-12 left-[38px] top-[419px] absolute bg-Yellow-Jasmine rounded-[20px] text-center justify-start text-Grape-Violet text-base font-bold font-['Poppins'] hover:opacity-90"
+            className="w-full h-12 mt-4 bg-Yellow-Jasmine hover:bg-opacity-90 active:scale-[0.99] rounded-[20px] text-Grape-Violet text-base font-bold transition-all shadow-md"
           >
-            Sign Up
+            Log In
           </button>
 
-          <div className="w-96 left-[57px] top-[482px] absolute text-center justify-start">
-            <span className="text-purple-950 text-base font-normal font-['Poppins']">
-              Sudah Punya Akun?
-            </span>{" "}
+          {/* Footer Tautan */}
+          <div className="text-center mt-6 text-purple-950 text-sm md:text-base font-normal">
+            Belum Punya Akun?{" "}
             <Link
-              to="/koleksi"
-              className="text-Grape-Violet text-base font-bold font-['Poppins'] underline"
+              to="/register"
+              className="text-Grape-Violet font-bold underline ml-1 hover:text-opacity-80"
             >
-              Log In
+              Sign Up
             </Link>
           </div>
         </form>

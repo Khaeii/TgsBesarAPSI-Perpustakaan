@@ -7,7 +7,7 @@ const STATUS_STYLES = {
   Dikembalikan: "text-White-Lilac font-bold",
 };
 
-// Sample borrow history rows — swap for live transaction data.
+// Sample borrow history rows
 const rows = [
   {
     id: "TRX-2026-0089",
@@ -49,99 +49,85 @@ const rows = [
 
 export default function RiwayatPeminjaman() {
   return (
-    <div className="figma-canvas-wrapper">
-      <div className="w-[1440px] h-[746px] relative bg-White-Lilac overflow-hidden mx-auto">
+    // Wrapper utama full width mengikuti lebar layar monitor browser
+    <div className="w-full min-h-screen bg-White-Lilac relative overflow-x-hidden pb-16 flex flex-col font-['Poppins']">
+      
+      {/* 1. TOP NAVBAR (Otomatis full stretch ke ujung monitor) */}
+      <div className="w-full z-30">
         <TopNavbar active="riwayat" userName="Sakha" />
+      </div>
 
-        <DecorBlob
-          name="ungu1"
-          className="w-96 h-[480px] left-[-86px] top-[266px] absolute"
-        />
-        <DecorBlob
-          name="kuning1"
-          className="w-48 h-80 left-[1249px] top-[62px] absolute"
-        />
-        <DecorBlob
-          name="kuning2"
-          className="w-80 h-80 left-[1096px] top-[426px] absolute"
-        />
-        <DecorBlob
-          name="ungu2"
-          className="w-80 h-64 left-[79px] top-[57px] absolute"
-        />
-        <DecorBlob
-          name="ungu1"
-          className="w-[474px] h-96 left-[437px] top-[367px] absolute"
-        />
+      {/* ================= BACKGROUND BLOBS DEKORASI ================= */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+        <DecorBlob name="ungu1" className="w-96 h-[480px] -left-20 top-[266px] absolute opacity-40" />
+        <DecorBlob name="kuning1" className="w-48 h-80 -right-10 top-[62px] absolute opacity-40" />
+        <DecorBlob name="kuning2" className="w-80 h-80 right-10 bottom-10 absolute opacity-40" />
+        <DecorBlob name="ungu2" className="w-80 h-64 left-20 top-[57px] absolute opacity-40" />
+        <DecorBlob name="ungu1" className="w-[474px] h-96 left-[35%] top-[367px] absolute opacity-30" />
+      </div>
 
-        <div className="w-[1334px] h-72 left-[51px] top-[112px] absolute bg-purple-950 rounded-[20px] z-10">
-          <h2 className="w-72 left-[31.16px] top-[28px] absolute text-center justify-center text-Yellow-Jasmine text-2xl font-bold font-['Josefin_Sans']">
+      {/* CONTAINER UTAMA (Membatasi isi konten tengah agar simetris maks 1440px) */}
+      <div className="w-full max-w-[1440px] mx-auto px-4 md:px-12 mt-12 z-10">
+        
+        {/* ================= TABLE CARD BASE ================= */}
+        {/* Menggunakan padding dinamis & overflow-x-auto agar aman jika dibuka di layar kecil */}
+        <div className="w-full bg-purple-950 rounded-[20px] shadow-xl p-6 md:p-10 text-White-Lilac overflow-x-auto">
+          
+          {/* Judul Riwayat */}
+          <h2 className="text-Yellow-Jasmine text-2xl font-bold font-['Josefin_Sans'] mb-8">
             Riwayat Peminjaman
           </h2>
 
-          {/* Table header */}
-          <div className="left-[38px] top-[79px] absolute justify-start text-White-Lilac text-xl font-bold font-['Poppins']">
-            ID PINJAM
-          </div>
-          <div className="left-[214px] top-[79px] absolute justify-start text-White-Lilac text-xl font-bold font-['Poppins']">
-            JUDUL BUKU
-          </div>
-          <div className="left-[605px] top-[79px] absolute text-right justify-start text-White-Lilac text-xl font-bold font-['Poppins']">
-            TGL PINJAM
-          </div>
-          <div className="left-[757px] top-[79px] absolute text-right justify-start text-White-Lilac text-xl font-bold font-['Poppins']">
-            BATAS TEMPO
-          </div>
-          <div className="left-[971px] top-[79px] absolute justify-start text-White-Lilac text-xl font-bold font-['Poppins']">
-            STATUS
-          </div>
-          <div className="left-[1159px] top-[79px] absolute justify-start text-White-Lilac text-xl font-bold font-['Poppins']">
-            DENDA
-          </div>
-          <div className="w-[1263px] h-0 left-[31px] top-[118.50px] absolute outline outline-2 outline-offset-[-1px] outline-white" />
+          {/* Struktur Tabel Utama Responsif */}
+          <table className="w-full min-w-[1100px] border-collapse text-left">
+            <thead>
+              <tr className="text-xl font-bold border-b-2 border-white/80 pb-3">
+                <th className="pb-4 font-['Poppins'] text-base md:text-xl w-[15%]">ID PINJAM</th>
+                <th className="pb-4 font-['Poppins'] text-base md:text-xl w-[35%]">JUDUL BUKU</th>
+                <th className="pb-4 font-['Poppins'] text-base md:text-xl w-[13%] text-right pr-6">TGL PINJAM</th>
+                <th className="pb-4 font-['Poppins'] text-base md:text-xl w-[13%] text-right pr-6">BATAS TEMPO</th>
+                <th className="pb-4 font-['Poppins'] text-base md:text-xl w-[14%] pl-6">STATUS</th>
+                <th className="pb-4 font-['Poppins'] text-base md:text-xl w-[10%]">DENDA</th>
+              </tr>
+            </thead>
+            
+            <tbody className="divide-y divide-white/10">
+              {rows.map((row, i) => (
+                <tr key={i} className="text-base font-normal hover:bg-white/5 transition-colors">
+                  {/* ID Pinjam */}
+                  <td className="py-4 font-['Poppins'] font-light tracking-wide">
+                    {row.id}
+                  </td>
+                  
+                  {/* Judul Buku */}
+                  <td className="py-4 font-['Poppins'] pr-8 line-clamp-1 mt-3 block max-w-[400px]">
+                    {row.title}
+                  </td>
+                  
+                  {/* Tanggal Pinjam */}
+                  <td className="py-4 font-['Poppins'] text-right pr-6">
+                    {row.tglPinjam}
+                  </td>
+                  
+                  {/* Batas Tempo */}
+                  <td className="py-4 font-['Poppins'] text-right pr-6">
+                    {row.batasTempo}
+                  </td>
+                  
+                  {/* Status Transaksi */}
+                  <td className={`py-4 font-['Poppins'] pl-6 ${STATUS_STYLES[row.statusKey]}`}>
+                    {row.status}
+                  </td>
+                  
+                  {/* Jumlah Denda */}
+                  <td className="py-4 font-['Poppins'] font-bold">
+                    {row.denda}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
 
-          {rows.map((row, i) => (
-            <div key={i} className="contents">
-              <div
-                className="left-[38px] absolute justify-start text-White-Lilac text-base font-normal font-['Poppins']"
-                style={{ top: 127 + i * 32 }}
-              >
-                {row.id}
-              </div>
-              <div
-                className="left-[214px] absolute justify-start text-White-Lilac text-base font-normal font-['Poppins']"
-                style={{ top: 127 + i * 32 }}
-              >
-                {row.title}
-              </div>
-              <div
-                className="w-28 left-[605px] absolute text-right justify-start text-White-Lilac text-base font-normal font-['Poppins']"
-                style={{ top: 127 + i * 32 }}
-              >
-                {row.tglPinjam}
-              </div>
-              <div
-                className="w-36 left-[757px] absolute text-right justify-start text-White-Lilac text-base font-normal font-['Poppins']"
-                style={{ top: 127 + i * 32 }}
-              >
-                {row.batasTempo}
-              </div>
-              <div
-                className={`w-40 left-[971px] absolute justify-start text-base font-['Poppins'] ${
-                  STATUS_STYLES[row.statusKey]
-                }`}
-                style={{ top: 127 + i * 32 }}
-              >
-                {row.status}
-              </div>
-              <div
-                className="w-28 left-[1159px] absolute justify-start text-White-Lilac text-base font-bold font-['Poppins']"
-                style={{ top: 127 + i * 32 }}
-              >
-                {row.denda}
-              </div>
-            </div>
-          ))}
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 import DecorBlob from "../components/DecorBlob";
 import Sidebar from "../components/Sidebar";
 
-// Sample pending-return rows — swap for live transaction data.
+// Sample pending-return rows — swap for live transaction data from your backend API.
 const rows = [
   {
     idTrans: "12345678",
@@ -39,65 +39,91 @@ const rows = [
 
 export default function Pengembalian() {
   return (
-    <div className="figma-canvas-wrapper">
-      <div className="w-[1440px] h-[746px] relative bg-White-Lilac overflow-hidden mx-auto">
-        <Sidebar active="pengembalian" />
+    // Main layout wrapper: Fleksibel mendatar memisahkan Sidebar dengan area konten
+    <div className="w-full min-h-screen bg-White-Lilac flex flex-col md:flex-row relative overflow-x-hidden font-['Poppins']">
+      
+      {/* 1. SIDEBAR ADMIN (Menjaga navigasi Admin tetap aktif & responsif) */}
+      <Sidebar active="pengembalian" />
 
-        <div className="w-96 h-14 left-[255px] top-[52px] absolute bg-Grape-Violet rounded-tr-[20px] rounded-br-[20px] flex items-center">
-          <h1 className="w-full text-center justify-center text-White-Lilac text-3xl font-bold font-['Josefin_Sans']">
+      {/* ================= AREA KONTEN UTAMA (Kanan) ================= */}
+      <main className="flex-1 p-6 md:p-12 relative z-10 max-w-[1200px] mx-auto w-full flex flex-col gap-10">
+        
+        {/* Header Title Bar Section */}
+        <div className="w-full max-w-sm h-14 bg-Grape-Violet rounded-r-[20px] md:rounded-tr-[20px] md:rounded-br-[20px] flex items-center px-6 shadow-md -ml-6 md:-ml-12">
+          <h1 className="text-White-Lilac text-xl md:text-2xl font-bold font-['Josefin_Sans'] tracking-wide">
             Sirkulasi Pengembalian
           </h1>
         </div>
 
-        <DecorBlob
-          name="kuning1"
-          className="w-40 h-64 left-[1400px] top-[378px] absolute origin-top-left rotate-180"
-        />
-        <DecorBlob
-          name="kuning2"
-          className="w-48 h-80 left-[255px] top-[518px] absolute origin-top-left rotate-180"
-        />
+        {/* ================= BACKGROUND BLOBS (Dekoratif Estetik) ================= */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 opacity-30">
+          <DecorBlob name="kuning1" className="w-40 h-64 right-0 top-1/3 absolute" />
+          <DecorBlob name="kuning2" className="w-48 h-80 left-10 bottom-1/4 absolute" />
+        </div>
 
-        <div className="w-[1113px] h-72 left-[287px] top-[135px] absolute bg-purple-950 rounded-[20px] z-10 px-7 py-6">
-          <h2 className="text-Yellow-Jasmine text-2xl font-bold font-['Josefin_Sans']">
+        {/* ================= 2. VERIFIKASI PENGEMBALIAN DATA TABLE ================= */}
+        <div className="w-full bg-purple-950 rounded-[20px] shadow-xl p-6 md:p-8 z-10 text-White-Lilac flex flex-col">
+          
+          {/* Card Header */}
+          <h2 className="text-Yellow-Jasmine text-2xl font-bold font-['Josefin_Sans'] mb-6 border-b border-white/10 pb-4">
             Verifikasi Pengembalian Buku
           </h2>
 
-          <div className="grid grid-cols-[1fr_1.4fr_1.6fr_1.2fr_1fr_1fr] gap-x-4 mt-9 text-White-Lilac text-xl font-bold font-['Poppins']">
-            <span>ID TRANS</span>
-            <span>NAMA ANGGOTA</span>
-            <span>JUDUL BUKU</span>
-            <span className="text-center">KETERLAMBATAN</span>
-            <span className="text-center">DENDA</span>
-            <span className="text-center">AKSI</span>
+          {/* Wrapper Kontrol Luapan (Overflow-x-auto) agar data baris aman di layar kecil */}
+          <div className="w-full overflow-x-auto">
+            <table className="w-full min-w-[900px] border-collapse text-left">
+              <thead>
+                <tr className="text-sm md:text-base font-bold text-white/90 border-b-2 border-white/40">
+                  <th className="pb-3 w-[15%]">ID TRANS</th>
+                  <th className="pb-3 w-[25%]">NAMA ANGGOTA</th>
+                  <th className="pb-3 w-[25%]">JUDUL BUKU</th>
+                  <th className="pb-3 w-[15%] text-center">KETERLAMBATAN</th>
+                  <th className="pb-3 w-[10%] text-center">DENDA</th>
+                  <th className="pb-3 w-[10%] text-center">AKSI</th>
+                </tr>
+              </thead>
+              
+              <tbody className="divide-y divide-white/10 text-sm font-light">
+                {rows.map((row, i) => (
+                  <tr key={i} className="hover:bg-white/5 transition-colors">
+                    {/* ID Transaksi */}
+                    <td className="py-4 font-normal tracking-wide">{row.idTrans}</td>
+                    
+                    {/* Nama Anggota */}
+                    <td className="py-4 pr-3 font-normal">{row.nama}</td>
+                    
+                    {/* Judul Buku */}
+                    <td className="py-4 pr-4 font-normal max-w-[220px] truncate">
+                      {row.judul}
+                    </td>
+                    
+                    {/* Status Keterlambatan */}
+                    <td className={`py-4 text-center font-bold ${row.terlambat ? "text-red-500" : "text-white/80"}`}>
+                      {row.keterlambatan}
+                    </td>
+                    
+                    {/* Jumlah Denda */}
+                    <td className="py-4 text-center font-bold">{row.denda}</td>
+                    
+                    {/* Tombol Aksi Verifikasi */}
+                    <td className="py-4">
+                      <div className="flex justify-center">
+                        <button 
+                          type="button" 
+                          className="w-24 h-7 bg-amber-200 hover:bg-amber-300 active:scale-95 text-center text-Grape-Violet text-xs font-bold rounded-[20px] shadow-sm transition-all"
+                        >
+                          Verifikasi
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
-          <div className="w-full h-0 mt-2 outline outline-2 outline-offset-[-1px] outline-white" />
 
-          {rows.map((row, i) => (
-            <div
-              key={i}
-              className="grid grid-cols-[1fr_1.4fr_1.6fr_1.2fr_1fr_1fr] gap-x-4 mt-4 items-center text-White-Lilac text-base font-['Poppins']"
-            >
-              <span>{row.idTrans}</span>
-              <span>{row.nama}</span>
-              <span>{row.judul}</span>
-              <span
-                className={`text-center font-bold ${
-                  row.terlambat ? "text-red-500" : ""
-                }`}
-              >
-                {row.keterlambatan}
-              </span>
-              <span className="text-center font-bold">{row.denda}</span>
-              <div className="flex justify-center">
-                <button className="w-28 h-6 bg-amber-200 rounded-[20px] text-center text-Grape-Violet text-base font-bold hover:opacity-90">
-                  Verifikasi
-                </button>
-              </div>
-            </div>
-          ))}
         </div>
-      </div>
+      </main>
     </div>
   );
 }
