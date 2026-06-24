@@ -1,0 +1,11 @@
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Horizontal scroll wrapper so the 1440px Figma canvas stays intact on
+   smaller viewports instead of squashing/breaking the absolute layout */
+.figma-canvas-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
