@@ -3,22 +3,25 @@ import DecorBlob from "../components/DecorBlob";
 
 export default function Login() {
   return (
-    <div className="w-full min-h-screen bg-Grape-Violet flex justify-center items-center overflow-x-hidden relative px-4 py-8 font-['Poppins']">
+    <div 
+      className="w-full min-h-screen bg-Grape-Violet flex justify-center items-center overflow-x-hidden relative px-4 py-8 font-['Poppins'] bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: "url('src/assets/Frame5.png')" }}
+    >
       
       {/* ================= BACKGROUND BLOBS (Responsif & Mengalir) ================= */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
-        <DecorBlob name="ungu1" className="w-[40vw] h-[40vw] max-w-[601px] max-h-[613px] -right-20 top-10 absolute opacity-70" />
-        <DecorBlob name="ungu2" className="w-[40vw] h-[40vw] max-w-[601px] max-h-[613px] -left-20 -bottom-20 absolute rotate-180 opacity-70" />
-        <DecorBlob name="kuning1" className="w-[30vw] h-[25vw] max-w-[474px] max-h-[380px] left-10 top-[40%] absolute opacity-40" />
-        <DecorBlob name="kuning2" className="w-[30vw] h-[25vw] max-w-[474px] max-h-[380px] right-10 bottom-10 absolute rotate-180 opacity-40" />
-      </div>
+      
 
       {/* ================= WATERMARKS BACKDROP ================= */}
       <div className="absolute inset-0 pointer-events-none hidden lg:block z-10 select-none">
-        <div className="left-[5%] top-[70%] absolute rotate-[-28.27deg] text-purple-300/20 text-4xl font-bold font-['Josefin_Sans']">Perpustakan Kita</div>
-        <div className="right-[10%] top-[40%] absolute rotate-[-28.27deg] text-amber-200/15 text-4xl font-bold font-['Josefin_Sans']">Perpustakan Kita</div>
         <div className="left-[5%] top-[15%] absolute rotate-[-28.27deg] text-purple-300/20 text-4xl font-bold font-['Josefin_Sans']">Perpustakan Kita</div>
-        <div className="right-[5%] top-[10%] absolute rotate-[-28.27deg] text-purple-300/20 text-4xl font-bold font-['Josefin_Sans']">Perpustakan Kita</div>
+        <div className="left-[5%] top-[50%] absolute rotate-[-28.27deg] text-yellow-300/20 text-4xl font-bold font-['Josefin_Sans']">Perpustakan Kita</div>
+        <div className="left-[5%] top-[85%] absolute rotate-[-28.27deg] text-purple-300/20 text-4xl font-bold font-['Josefin_Sans']">Perpustakan Kita</div>
+        <div className="left-[40%] top-[15%] absolute rotate-[-28.27deg] text-yellow-300/20 text-4xl font-bold font-['Josefin_Sans']">Perpustakan Kita</div>
+        <div className="left-[40%] top-[50%] absolute rotate-[-28.27deg] text-purple-300/20 text-4xl font-bold font-['Josefin_Sans']">Perpustakan Kita</div>
+        <div className="left-[40%] top-[85%] absolute rotate-[-28.27deg] text-yellow-300/20 text-4xl font-bold font-['Josefin_Sans']">Perpustakan Kita</div>
+        <div className="left-[80%] top-[15%] absolute rotate-[-28.27deg] text-purple-300/20 text-4xl font-bold font-['Josefin_Sans']">Perpustakan Kita</div>
+        <div className="left-[80%] top-[50%] absolute rotate-[-28.27deg] text-yellow-300/20 text-4xl font-bold font-['Josefin_Sans']">Perpustakan Kita</div>
+        <div className="left-[80%] top-[85%] absolute rotate-[-28.27deg] text-purple-300/20 text-4xl font-bold font-['Josefin_Sans']">Perpustakan Kita</div>
       </div>
 
       {/* ================= FORM CARD CONTAINER ================= */}
@@ -28,7 +31,7 @@ export default function Login() {
         <Link
           to="/register"
           aria-label="Tutup"
-          className="absolute right-6 top-6 text-purple-950 text-xl font-bold hover:text-red-500 transition-colors"
+          className="absolute right-6 top-6 text-purple-950 text-xl font-bold hover:text-purple-300 transition-colors"
         >
           X
         </Link>
