@@ -11,7 +11,8 @@ export default function TopNavbar({ active, userName = "Sakha" }) {
     "text-White-Lilac text-xl font-['Poppins'] transition-opacity hover:opacity-80";
 
   return (
-    <div className="w-full h-16 absolute left-0 top-0 bg-Grape-Violet flex items-center justify-between px-5 z-10">
+    // 'absolute' diganti dadi 'fixed' lan ditambahi 'top-0 left-0 right-0' biar nempel pol pas di-scroll
+    <div className="w-full h-16 fixed left-0 top-0 right-0 bg-Grape-Violet flex items-center justify-between px-5 z-50">
       <div className="text-purple-300 text-3xl font-bold font-['Josefin_Sans']">
         📚 Perpustakan
       </div>
@@ -36,16 +37,21 @@ export default function TopNavbar({ active, userName = "Sakha" }) {
       </nav>
 
       <div className="flex items-center gap-3">
-        <button
-          type="button"
-          aria-label="Notifikasi"
-          className="w-8 h-8 rounded-full bg-purple-300/30 flex items-center justify-center"
-        >
-          🔔
-        </button>
         <span className="text-White-Lilac text-xl font-bold font-['Josefin_Sans']">
           {userName}
         </span>
+
+        <Link 
+          to="/login" 
+          className="hover:opacity-80 transition-opacity flex items-center justify-center"
+          title="Logout"
+        >
+          <img 
+            src="src/assets/pintu.png" 
+            alt="Logout" 
+            className="w-7 h-7 object-contain" 
+          />
+        </Link>
       </div>
     </div>
   );

@@ -7,14 +7,13 @@ const STATUS_STYLES = {
   Dikembalikan: "text-White-Lilac font-bold",
 };
 
-// Sample borrow history rows
 const rows = [
   {
     id: "TRX-2026-0089",
     title: "Analisis dan Perancangan Sistem Informasi",
     tglPinjam: "10/6/2026",
     batasTempo: "17/06/2026",
-    status: "Terlambat (4 hari)",
+    status: "Terlambat",
     statusKey: "Terlambat",
     denda: "Rp 12.000",
   },
@@ -49,7 +48,6 @@ const rows = [
 
 export default function RiwayatPeminjaman() {
   return (
-    // Wrapper utama full width mengikuti lebar layar monitor browser
     <div className="w-full min-h-screen bg-White-Lilac relative overflow-x-hidden pb-16 flex flex-col font-['Poppins']">
       
       {/* 1. TOP NAVBAR (Otomatis full stretch ke ujung monitor) */}
@@ -57,78 +55,68 @@ export default function RiwayatPeminjaman() {
         <TopNavbar active="riwayat" userName="Sakha" />
       </div>
 
-      {/* ================= BACKGROUND BLOBS DEKORASI ================= */}
+      {/* BACKGROUND */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
-        <DecorBlob name="ungu1" className="w-96 h-[480px] -left-20 top-[266px] absolute opacity-40" />
-        <DecorBlob name="kuning1" className="w-48 h-80 -right-10 top-[62px] absolute opacity-40" />
-        <DecorBlob name="kuning2" className="w-80 h-80 right-10 bottom-10 absolute opacity-40" />
-        <DecorBlob name="ungu2" className="w-80 h-64 left-20 top-[57px] absolute opacity-40" />
-        <DecorBlob name="ungu1" className="w-[474px] h-96 left-[35%] top-[367px] absolute opacity-30" />
+        <DecorBlob name="ungu1" className="w-180 h-[500px] -right-90 bottom-[-50px] absolute opacity-40" />
+        <DecorBlob name="kuning2" className="w-80 h-[400px] -left-20 top-[-60px] absolute opacity-40" />
+        <DecorBlob name="ungu2" className="w-100 h-[380px] -right-20 top-[20px] absolute opacity-40" />
+        <DecorBlob name="kuning2" className="w-80 h-[400px] right-[-30px] bottom-[-50px] absolute opacity-40" />
       </div>
 
-      {/* CONTAINER UTAMA (Membatasi isi konten tengah agar simetris maks 1440px) */}
-      <div className="w-full max-w-[1440px] mx-auto px-4 md:px-12 mt-12 z-10">
+      {/* CONTAINER UTAMA */}
+      <div className="w-full max-w-[1800px] mx-auto px-4 md:px-12 mt-12 z-10">
         
-        {/* ================= TABLE CARD BASE ================= */}
-        {/* Menggunakan padding dinamis & overflow-x-auto agar aman jika dibuka di layar kecil */}
-        <div className="w-full bg-purple-950 rounded-[20px] shadow-xl p-6 md:p-10 text-White-Lilac overflow-x-auto">
+      {/* TABLE CARD BASE */}
+      <div className="w-full max-w-[1440px] mt-20 mx-auto bg-purple-950 rounded-[20px] shadow-xl p-6 md:p-12 text-White-Lilac overflow-x-auto">
+        
+        <h2 className="text-Yellow-Jasmine text-3xl font-bold font-['Josefin_Sans'] mb-8 text-center md:text-left">
+          Riwayat Peminjaman
+        </h2>
+
+        {/* Struktur Tabel Utama Responsif */}
+        <table className="w-full min-w-[1000px] border-collapse">
+          <thead>
+            <tr className="text-xl font-bold border-b border-white/20 text-center">
+              <th className="pb-4 font-['Poppins'] text-base md:text-lg w-[15%] text-left pl-4">ID PINJAM</th>
+              <th className="pb-4 font-['Poppins'] text-base md:text-lg w-[35%] text-left">JUDUL BUKU</th>
+              <th className="pb-4 font-['Poppins'] text-base md:text-lg w-[13%]">TGL PINJAM</th>
+              <th className="pb-4 font-['Poppins'] text-base md:text-lg w-[13%]">BATAS TEMPO</th>
+              <th className="pb-4 font-['Poppins'] text-base md:text-lg w-[14%]">STATUS</th>
+              <th className="pb-4 font-['Poppins'] text-base md:text-lg w-[10%] pr-4 text-right">DENDA</th>
+            </tr>
+          </thead>
           
-          {/* Judul Riwayat */}
-          <h2 className="text-Yellow-Jasmine text-2xl font-bold font-['Josefin_Sans'] mb-8">
-            Riwayat Peminjaman
-          </h2>
-
-          {/* Struktur Tabel Utama Responsif */}
-          <table className="w-full min-w-[1100px] border-collapse text-left">
-            <thead>
-              <tr className="text-xl font-bold border-b-2 border-white/80 pb-3">
-                <th className="pb-4 font-['Poppins'] text-base md:text-xl w-[15%]">ID PINJAM</th>
-                <th className="pb-4 font-['Poppins'] text-base md:text-xl w-[35%]">JUDUL BUKU</th>
-                <th className="pb-4 font-['Poppins'] text-base md:text-xl w-[13%] text-right pr-6">TGL PINJAM</th>
-                <th className="pb-4 font-['Poppins'] text-base md:text-xl w-[13%] text-right pr-6">BATAS TEMPO</th>
-                <th className="pb-4 font-['Poppins'] text-base md:text-xl w-[14%] pl-6">STATUS</th>
-                <th className="pb-4 font-['Poppins'] text-base md:text-xl w-[10%]">DENDA</th>
+          <tbody className="divide-y divide-white/10">
+            {rows.map((row, i) => (
+              <tr key={i} className="text-base font-normal hover:bg-white/5 transition-colors align-middle text-center">
+                <td className="py-5 font-['Poppins'] font-light tracking-wide text-left pl-4">
+                  {row.id}
+                </td>
+                
+                <td className="py-5 font-['Poppins'] text-left max-w-[350px] truncate">
+                  {row.title}
+                </td>
+              
+                <td className="py-5 font-['Poppins']">
+                  {row.tglPinjam}
+                </td>
+                
+                <td className="py-5 font-['Poppins']">
+                  {row.batasTempo}
+                </td>
+                
+                <td className={`py-5 font-['Poppins'] font-medium ${STATUS_STYLES[row.statusKey]}`}>
+                  {row.status}
+                </td>
+                
+                <td className="py-5 font-['Poppins'] font-bold pr-4 text-right">
+                  {row.denda}
+                </td>
               </tr>
-            </thead>
-            
-            <tbody className="divide-y divide-white/10">
-              {rows.map((row, i) => (
-                <tr key={i} className="text-base font-normal hover:bg-white/5 transition-colors">
-                  {/* ID Pinjam */}
-                  <td className="py-4 font-['Poppins'] font-light tracking-wide">
-                    {row.id}
-                  </td>
-                  
-                  {/* Judul Buku */}
-                  <td className="py-4 font-['Poppins'] pr-8 line-clamp-1 mt-3 block max-w-[400px]">
-                    {row.title}
-                  </td>
-                  
-                  {/* Tanggal Pinjam */}
-                  <td className="py-4 font-['Poppins'] text-right pr-6">
-                    {row.tglPinjam}
-                  </td>
-                  
-                  {/* Batas Tempo */}
-                  <td className="py-4 font-['Poppins'] text-right pr-6">
-                    {row.batasTempo}
-                  </td>
-                  
-                  {/* Status Transaksi */}
-                  <td className={`py-4 font-['Poppins'] pl-6 ${STATUS_STYLES[row.statusKey]}`}>
-                    {row.status}
-                  </td>
-                  
-                  {/* Jumlah Denda */}
-                  <td className="py-4 font-['Poppins'] font-bold">
-                    {row.denda}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-
-        </div>
+            ))}
+          </tbody>
+        </table>
+      </div>
       </div>
     </div>
   );
